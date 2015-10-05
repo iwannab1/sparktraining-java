@@ -12,9 +12,10 @@ public class PipeEx {
 		SparkConf conf = new SparkConf().setAppName("PipeEx").setMaster("local[*]");
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		
-		JavaRDD<Integer> number = sc.parallelize(Arrays.asList(1,2,3,4,5,6,7,8,9));
+		JavaRDD<Integer> number = sc.parallelize(Arrays.asList(1,2,3,4,5,6,7,8,9),3);
+		System.out.println(number.collect());
 		
-		number.pipe("C:\\Users\\iwannab1\\workspace\\SparkTraining\\src\\print.bat").collect();
+		System.out.println(number.pipe("C:\\Users\\iwannab1\\workspace\\SparkTraining\\src\\print.bat").collect());
 		
 		
 		sc.close();
