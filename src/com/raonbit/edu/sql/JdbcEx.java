@@ -35,6 +35,18 @@ public class JdbcEx {
 	    df.show();
 	    df.printSchema();
 	    
+	    df.registerTempTable("SparkProperty");
+	    
+	    DataFrame groupone = sqlContext.sql("select * from SparkProperty where groupId = 1");
+	    Row[] groups = groupone.collect();
+	    
+	    for(Row g : groups){
+	    	System.out.println(g.getInt(0));
+	    	System.out.println(g.getInt(1));
+	    	System.out.println(g.getString(2));
+	    }
+	    
+	    
 	    JavaRDD<Row> rdd = df.select("name","value").toJavaRDD();
 	    
 	    rdd.foreachPartition(new VoidFunction<Iterator<Row>>() {

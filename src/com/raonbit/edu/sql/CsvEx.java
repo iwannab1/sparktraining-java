@@ -23,7 +23,9 @@ public class CsvEx {
 	    
 	    
 	    DataFrame df = sqlContext.read().format("com.databricks.spark.csv").option("header", "true").load("c:\\temp\\sample.csv");
+	    //df.groupBy("key").agg(exprs)
 	    
+	    df.show();
 	    JavaPairRDD<String,String> pair = df.select("key","value").toJavaRDD().mapToPair(new PairFunction<Row,String, String>(){
 			@Override
 			public Tuple2<String, String> call(Row t) throws Exception {
